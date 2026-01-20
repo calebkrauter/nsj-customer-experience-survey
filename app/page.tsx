@@ -1,27 +1,24 @@
 'use client';
+import { Left } from './components/Left';
 import { Prompt } from './components/Prompt';
+import { Prompts } from './components/Prompts';
+import { Right } from './components/Right';
+import { Stars } from './components/Stars';
 
 export default function Home() {
   return (
     <main className='main'>
       <div className='surveryContainer'>
         <div className='header'>NORTH STAR JET</div>
-        <Prompt
-          title={'What brought you to North Star Jet?'}
-          values={[
-            'CAA',
-            'World Fuel',
-            'Prices',
-            'Customer Service',
-            'Word of Mouth',
-            'Other',
-          ]}
-        />
-        <Prompt
-          title='What is your favorite amenity?'
-          values={['Pop Corn', 'Merch', 'Coffee']}
-        />
-        <Prompt title='Would you return?' values={['Yes', 'No']} />
+        <div className='surveyStructure'>
+          <Left className='left'>
+            <Prompts />
+          </Left>
+          <Right className='right'>
+            <input className='starsRating'></input>
+            <Stars />
+          </Right>
+        </div>
       </div>
     </main>
   );
