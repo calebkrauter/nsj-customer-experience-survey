@@ -25,9 +25,9 @@ const schema = z.object({
   select3: z
     .string()
     .refine((val) => val !== '', { message: 'Select an option' }),
-  rating1: z.number().gt(0, 'Select a rating'),
-  rating2: z.number().gt(0, 'Select a rating'),
-  rating3: z.number().gt(0, 'Select a rating'),
+  rating1: z.number().gt(0, 'Select rating'),
+  rating2: z.number().gt(0, 'Select rating'),
+  rating3: z.number().gt(0, 'Select rating'),
   rating1Textbox: z.string().min(1, { message: 'Required response' }),
   rating2Textbox: z.string().min(1, { message: 'Required response' }),
   rating3Textbox: z.string().min(1, { message: 'Required response' }),
@@ -89,18 +89,21 @@ export function Form() {
 
       <div className='surveyStructure' id='surveyStructure'>
         <div className='tailInputContainer col input2'>
-          <label className={`subject`} htmlFor='tail_number'>
+          <label
+            className={`subject ${errors.tail_number?.message ? 'error' : ''}`}
+            htmlFor='tail_number'
+          >
             Tail Number
           </label>
           <input
             placeholder='N1234'
-            className={`fields ${errors.tail_number?.message ? 'errorOutline inputError' : ' outline'}`}
+            className={`fields ${errors.tail_number?.message ? 'errorOutline' : ' outline'}`}
             id='tail_number'
             {...register('tail_number')}
           ></input>
-          <div className={`${errors.tail_number?.message ? 'error' : ''}`}>
+          {/* <div className={`${errors.tail_number?.message ? 'error' : ''}`}>
             {errors.tail_number?.message}
-          </div>
+          </div> */}
         </div>
         <Dropdown
           title={'What brought you to North Star Jet?'}
@@ -128,7 +131,9 @@ export function Form() {
           register={{ ...register('select3') }}
         />
 
-        <div className={`subject ratingHeader`}>
+        <div
+          className={`subject ratingHeader ${errors.rating1Textbox ? 'error' : ''}`}
+        >
           <div>How was our Customer Service?</div>
           <Stars
             errorRating={errors.rating1?.message as string}
@@ -137,17 +142,19 @@ export function Form() {
           />
         </div>
         <textarea
-          className={`fields textarea ${(errors.rating1Textbox?.message as string) ? 'errorOutline textAreaError' : 'outline'}`}
+          className={`fields textarea ${(errors.rating1Textbox?.message as string) ? 'errorOutline' : 'outline'}`}
           placeholder='What about us stood out to you?'
           {...register('rating1Textbox')}
         ></textarea>
-        <div
+        {/* <div
           className={`${(errors.rating1Textbox?.message as string) ? 'error' : ''}`}
         >
           {errors.rating1Textbox?.message as string}
-        </div>
+        </div> */}
 
-        <div className={`subject ratingHeader`}>
+        <div
+          className={`subject ratingHeader ${errors.rating2Textbox ? 'error' : ''}`}
+        >
           <div>How did you like our amenities?</div>
           <Stars
             errorRating={errors.rating2?.message as string}
@@ -156,17 +163,19 @@ export function Form() {
           />
         </div>
         <textarea
-          className={`fields textarea ${(errors.rating2Textbox?.message as string) ? 'errorOutline textAreaError' : 'outline'}`}
+          className={`fields textarea ${(errors.rating2Textbox?.message as string) ? 'errorOutline' : 'outline'}`}
           placeholder='Did any amenities stand out to you?'
           {...register('rating2Textbox')}
         ></textarea>
-        <div
+        {/* <div
           className={`${(errors.rating2Textbox?.message as string) ? 'error' : ''}`}
         >
           {errors.rating2Textbox?.message as string}
-        </div>
+        </div> */}
 
-        <div className={`subject ratingHeader`}>
+        <div
+          className={`subject ratingHeader ${errors.rating3Textbox ? 'error' : ''}`}
+        >
           <div> How did you like our pricing?</div>
           <Stars
             errorRating={errors.rating3?.message as string}
@@ -175,15 +184,15 @@ export function Form() {
           />
         </div>
         <textarea
-          className={`fields textarea ${(errors.rating3Textbox?.message as string) ? 'errorOutline textAreaError' : 'outline'}`}
+          className={`fields textarea ${(errors.rating3Textbox?.message as string) ? 'errorOutline' : 'outline'}`}
           placeholder='How do we compare?'
           {...register('rating3Textbox')}
         ></textarea>
-        <div
+        {/* <div
           className={`${(errors.rating3Textbox?.message as string) ? 'error' : ''}`}
         >
           {errors.rating3Textbox?.message as string}
-        </div>
+        </div> */}
       </div>
       <button type='submit' className='submitButton'>
         Submit

@@ -5,12 +5,13 @@
 ::placeholder {
   color: rgba(117, 112, 112, 0.4);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .textarea {
-  font-size: 13;
-  border-radius: 15px;
+  resize: none;
+  font-size: 16px;
+  border-radius: 10px;
   max-width: 100%;
   min-width: 100%;
   min-height: 50px;
@@ -23,24 +24,11 @@
   margin-bottom: 20px;
 }
 
-
-.inputError {
-  margin-bottom: 6px;
-}
-
-.textAreaError {
-  margin-bottom: 6px;
-}
-
-.dropdownError {
-  margin-bottom: 6px;
-}
-
 .outline {
   outline: 1px solid white;
 }
 .outline:focus {
-  outline: 2px solid #0271e3
+  outline: 1px solid #0271e3
 }
 
 .main {
@@ -80,7 +68,8 @@ input {
   height: 50px;
   padding: 15px;
   border: solid;
-  border-radius: 15px;
+  font-size: 16px;
+  border-radius: 10px;
   border-color:rgba(188, 188, 188, 0.4);
   border-width: 1px;
   margin-top: 5px;
@@ -111,7 +100,7 @@ button {
   border-radius: 100px;
   font-weight: bold;
   font-size: large;
-  margin-top: 50px;
+  margin-top: 30px;
   background-color:#0271e3;
   color: rgb(255, 255, 255);
   text-justify: center;
@@ -121,9 +110,7 @@ button {
 }
 
 .ratingGroup {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
+  margin-bottom: 5px;
 }
 .surveyStructure {
   display: flex;
@@ -160,9 +147,10 @@ button {
 .star {
   display: flex;
   flex-direction: row;
-  margin-right: 5px;
+  margin-right: 2px;
 }
 
+@media (hover: hover) and (pointer: fine) {
 #ratingGroup:has(#star5:hover) #star5,
 #ratingGroup:has(#star5:hover, #star4:hover) #star4,
 #ratingGroup:has(#star5:hover, #star4:hover, #star3:hover) #star3,
@@ -170,7 +158,8 @@ button {
 #ratingGroup:has(#star5:hover, #star4:hover, #star3:hover, #star2:hover, #star1:hover) #star1
  {
   
-  fill: rgb(255, 195, 43);
+  fill: rgb(255, 194, 96);
+}
 }
 #ratingGroup:has(#star5.toggleStars) #star5,
 #ratingGroup:has(#star5.toggleStars, #star4.toggleStars) #star4,
@@ -179,7 +168,7 @@ button {
 #ratingGroup:has(#star5.toggleStars, #star4.toggleStars, #star3.toggleStars, #star2.toggleStars, #star1.toggleStars) #star1
  {
   
-  fill: rgb(255, 195, 43);
+  fill: rgb(255, 194, 96);
 }
 .subject {
   color:#828181;
@@ -190,7 +179,7 @@ button {
 .logo {
   margin-top: 5px;
   padding-top: 15px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .stars {
   display: flex;
@@ -200,27 +189,33 @@ button {
 .fields {
   background-color: white;
 }
+
 .dropdown {
   height: 50px;
   max-width: 100%;
   color: rgba(117, 112, 112, 0.4);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;  
+  font-size: 16px;  
   background-color: white;
   padding: 15px;
-  border-radius: 15px;
+  border-radius: 10px;
   border-color:rgba(188, 188, 188, 0.4);
   border-width: 1px;
   margin-top: 5px;
   margin-bottom: 20px;
 }
 
+
+
 .error {
   color: red;
-  font-size: bold;
-  font-size: 10px;
 
 }
+
+.errorColor {
+  color: red;
+}
+
 .errorStars {
   display: flex;
   margin-top:auto;
@@ -231,7 +226,7 @@ button {
 
 .errorOutline {
   outline: solid;
-  outline-width: 2px;
+  outline-width: 1px;
   outline-color: red;
 }
 
@@ -243,10 +238,10 @@ button {
 
 .errorGroupBorder {
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   border-color: red;
   border-radius: 5px;
-  padding-right: 5px;
+  padding: 3px;
 }
 
 html,

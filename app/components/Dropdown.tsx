@@ -14,7 +14,10 @@ export function Dropdown({ title, values, register, error }: Props) {
 
   return (
     <div className='prompt errorMarginBottom'>
-      <label className='subject' htmlFor={suervey_options_id}>
+      <label
+        className={`subject ${error ? 'errorColor' : ''}`}
+        htmlFor={suervey_options_id}
+      >
         {title}
       </label>
       <select
@@ -23,14 +26,20 @@ export function Dropdown({ title, values, register, error }: Props) {
         id={suervey_options_id}
         {...register}
       >
-        <option value='' disabled hidden>
-          &nbsp;&nbsp;&nbsp;{defaultVal}
+        <option
+          value=''
+          id='defaultOption'
+          className='defaultOption'
+          disabled
+          hidden
+        >
+          &nbsp;&nbsp;{defaultVal}
         </option>
 
         {values.map((value, i) => {
           return (
             <option value={value} key={i}>
-              &nbsp;&nbsp;&nbsp;{value}
+              &nbsp;&nbsp;{value}
             </option>
           );
         })}
