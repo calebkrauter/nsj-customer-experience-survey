@@ -43,7 +43,7 @@ export function Stars({ updateRating, errorRating, reset }: Props) {
                 height='25px'
                 width='25px'
                 version='1.1'
-                className={`subject ${getRating === rating ? 'toggleStars' : ''}`}
+                className={`subject star ${getRating === rating ? 'toggleStars' : ''}`}
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 473.486 473.486'
                 onClick={() => {

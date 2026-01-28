@@ -14,7 +14,10 @@ export function Dropdown({ title, values, register, error }: Props) {
 
   return (
     <div className='prompt errorMarginBottom'>
-      <label className='subject' htmlFor={suervey_options_id}>
+      <label
+        className={`subject ${error ? 'errorColor' : ''}`}
+        htmlFor={suervey_options_id}
+      >
         {title}
       </label>
       <select
