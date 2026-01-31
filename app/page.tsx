@@ -1,5 +1,5 @@
 'use client';
-import { Form } from './form/Form';
+import { Form } from './frontend/form/Form';
 
 export default function Home() {
   return (
