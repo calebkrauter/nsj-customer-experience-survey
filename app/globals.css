@@ -110,6 +110,7 @@ button {
 }
 
 .ratingGroup {
+  display: flex;
   margin-bottom: 5px;
 }
 .surveyStructure {
@@ -177,6 +178,7 @@ button {
 
 .textBoxTitle {
   margin-bottom: 5px;
+  max-width: 250px;
 }
 
 .logo {

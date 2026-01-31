@@ -1,7 +1,7 @@
 import { SurveyDefinition } from '../types';
 
 export const surveys: Record<string, SurveyDefinition> = {
-	customer_service: {
+	customer_experience: {
 		surveyKey: 'customer_experience',
 		surveyName: 'Customer Experience',
 		surveyPath: '/surveys/customer-experience',
@@ -15,7 +15,8 @@ export const surveys: Record<string, SurveyDefinition> = {
 				minLength: 3,
 				placeholder: 'N123AB',
 				required: true,
-				type: 'text',
+				showLabel: true,
+				type: 'text_input',
 			},
       {
 				helpText: 'Example: CAA',
@@ -23,6 +24,7 @@ export const surveys: Record<string, SurveyDefinition> = {
 				label: 'What bruoght you to North Star Jet?',
 				placeholder: 'Select an option',
 				required: true,
+				showLabel: true,
         options: ['CAA', 'Contract Fuel', 'Prices', 'Customer Service', 'Word of Mouth', 'Other'],
 				type: 'dropdown_select_one',
 			},
@@ -32,14 +34,17 @@ export const surveys: Record<string, SurveyDefinition> = {
 				label: 'What is your favorite amenity?',
 				placeholder: 'Select an option',
 				required: true,
+				showLabel: true,
         options: ['Pop Corn', 'Merch', 'Coffee'],
 				type: 'dropdown_select_one',
-			},      {
+			},      
+			{
 				helpText: 'Example: Yes',
 				id: 'would_you_return',
 				label: 'Would you return?',
 				placeholder: 'Select an option',
 				required: true,
+				showLabel: true,
         options: ['Yes', 'No'],
 				type: 'dropdown_select_one',
 			},
@@ -50,17 +55,19 @@ export const surveys: Record<string, SurveyDefinition> = {
 				max: 5,
 				min: 1,
 				required: true,
+				showLabel: false,
 				type: 'stars',
 			},
       {
 				helpText: 'How was our service?',
 				id: 'how_was_our_customer_service_text',
-				label: 'How was our customer service?',
+				label: 'How was our Customer Service?',
 				maxLength: 500,
 				minLength: 3,
 				placeholder: 'What about us stood out to you?',
 				required: true,
-				type: 'text',
+				showLabel: true,
+				type: 'text_box',
 			},
       {
 				helpText: 'Overall score.',
@@ -69,6 +76,7 @@ export const surveys: Record<string, SurveyDefinition> = {
 				max: 5,
 				min: 1,
 				required: true,
+				showLabel: false,
 				type: 'stars',
 			},
       {
@@ -79,15 +87,17 @@ export const surveys: Record<string, SurveyDefinition> = {
 				minLength: 3,
 				placeholder: 'Did any amenities stand out to you?',
 				required: true,
-				type: 'text',
+				showLabel: true,
+				type: 'text_box',
 			},
       {
 				helpText: 'Overall score.',
-				id: 'how_do_our_prices_compare_stars',
-				label: 'How do our prices compare?',
+				id: 'how_did_you_like_our_prices_stars',
+				label: 'How did you like our prices?',
 				max: 5,
 				min: 1,
 				required: true,
+				showLabel: false,
 				type: 'stars',
 			},
       {
@@ -98,7 +108,8 @@ export const surveys: Record<string, SurveyDefinition> = {
 				minLength: 3,
 				placeholder: 'How do we compare?',
 				required: true,
-				type: 'text',
+				showLabel: true,
+				type: 'text_box',
 			},
 		],
 	},

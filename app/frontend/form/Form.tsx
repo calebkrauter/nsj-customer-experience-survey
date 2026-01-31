@@ -11,20 +11,32 @@ import { TextBox } from '../components/TextBox';
 import z, { ZodNumber, ZodString } from 'zod';
 // import { schema } from '../validation/schema';
 import { postSubmission } from '../requests/postSubmission';
-const fields = [
-  { name: 'firstName', type: 'text' },
-  { name: 'age', type: 'number' },
-];
+import { surveys } from '../form-templates/registry';
+import {
+  FieldTypes,
+  hasOptions,
+  hasPlaceholder,
+  SurveyQuestion,
+} from '../types';
+import { Hero } from '../components/Hero';
+
+const questions: SurveyQuestion[] = surveys.customer_experience.questions;
 
 // Create a dynamic Zod schema
 const schema = z.object(
-  fields.reduce(
-    (acc, field) => {
-      acc[field.name] =
-        field.type === 'number'
-          ? z.coerce.number().min(0) // 👈 important
-          : z.string().min(1, 'Required');
-      return acc;
+  questions.reduce(
+    (result, field) => {
+      if (field.type === FieldTypes.TEXT_INPUT) {
+        result[field.id] = z.string().min(1);
+      } else if (field.type === FieldTypes.TEXT_BOX) {
+        result[field.id] = z.string().min(1);
+      } else if (field.type === FieldTypes.STARS) {
+        result[field.id] = z.coerce.number().min(1, 'Select rating');
+      } else if (field.type === FieldTypes.DROPDOWN_SELECT_ONE) {
+        result[field.id] = z.string().refine((val) => val !== '');
+      }
+
+      return result;
     },
     {} as Record<string, z.ZodTypeAny>,
   ),
@@ -45,18 +57,11 @@ export function Form() {
     mode: 'onChange', // validate as soon as values change
   });
 
-  const handleRating1Change = (value: number) => {
+  const handleRatingChange = (value: number, i: number) => {
     setStarRating(0);
-    setValue('rating1', value, { shouldValidate: true });
+    setValue(questions[i].id, value, { shouldValidate: true });
   };
-  const handleRating2Change = (value: number) => {
-    setStarRating(0);
-    setValue('rating2', value, { shouldValidate: true });
-  };
-  const handleRating3Change = (value: number) => {
-    setStarRating(0);
-    setValue('rating3', value, { shouldValidate: true });
-  };
+
   const onSubmit: SubmitHandler<FormValues> = async () => {
     toast.success("We've received your feedback!");
     const submissionData = getValues();
@@ -66,85 +71,77 @@ export function Form() {
     postSubmission(submissionData);
   };
   const onInvalid: SubmitErrorHandler<FormValues> = () => {};
+  function placeholder(i: number) {
+    return hasPlaceholder(questions[i]) ? questions[i].placeholder : '';
+  }
+
+  function options(i: number) {
+    return hasOptions(questions[i]) ? questions[i].options : [];
+  }
   return (
     <form
       className='surveryContainer'
       onSubmit={handleSubmit(onSubmit, onInvalid)}
     >
       <Toaster position='top-center' reverseOrder={false} />
-
+      <Hero />
       <div className='surveyStructure' id='surveyStructure'>
-        <InputField
-          name={fields[0].name}
-          title={'Tail Number'}
-          placeholder={'N1234'}
-          error={errors[fields[0].name]?.message as string}
-          register={register(fields[0].name)}
-          type={fields[0].type}
-        />
+        {questions.map((question, i) => {
+          switch (question.type) {
+            case FieldTypes.TEXT_INPUT:
+              return (
+                <InputField
+                  key={questions[i].id}
+                  id={questions[i].id}
+                  title={questions[i].label}
+                  placeholder={placeholder(i)}
+                  error={errors[questions[i].id]?.message as string}
+                  showLabel
+                  register={register(questions[i].id)}
+                  type={questions[i].type}
+                />
+              );
 
-        <Dropdown
-          title={'What brought you to North Star Jet?'}
-          options={[
-            'CAA',
-            'World Fuel',
-            'Prices',
-            'Customer Service',
-            'Word of Mouth',
-            'Other',
-          ]}
-          error={errors.select1?.message as string}
-          register={{ ...register('select1') }}
-        />
-        <Dropdown
-          title='What is your favorite amenity?'
-          options={['Pop Corn', 'Merch', 'Coffee']}
-          error={errors.select2?.message as string}
-          register={{ ...register('select2') }}
-        />
-        <Dropdown
-          title='Would you return?'
-          options={['Yes', 'No']}
-          error={errors.select3?.message as string}
-          register={{ ...register('select3') }}
-        />
+            case FieldTypes.DROPDOWN_SELECT_ONE:
+              return (
+                <Dropdown
+                  key={questions[i].id}
+                  id={questions[i].id}
+                  title={questions[i].label}
+                  options={options(i)}
+                  error={errors[questions[i].id]?.message as string}
+                  showLabel
+                  register={register(questions[i].id)}
+                />
+              );
+            case FieldTypes.TEXT_BOX:
+              return (
+                <TextBox
+                  key={questions[i].id}
+                  id={questions[i].id}
+                  title={questions[i].label}
+                  placeholder={placeholder(i)}
+                  error={errors[questions[i].id]?.message as string}
+                  showLabel
+                  register={register(questions[i].id)}
+                />
+              );
+            case FieldTypes.STARS:
+              return (
+                <Stars
+                  key={questions[i].id}
+                  itr={i}
+                  title={questions[i].label}
+                  error={errors[questions[i].id]?.message as string}
+                  updateRating={handleRatingChange}
+                  showLabel={false}
+                  reset={{ getRating: starRating, setRating: setStarRating }}
+                />
+              );
+          }
 
-        <Stars
-          title={'How was our Customer Service?'}
-          error={errors.rating1?.message as string}
-          updateRating={handleRating1Change}
-          reset={{ getRating: starRating, setRating: setStarRating }}
-        />
-        <TextBox
-          placeholder={'What about us stood out to you?'}
-          error={errors.rating1Textbox?.message as string}
-          register={{ ...register('rating1Textbox') }}
-        />
-
-        <Stars
-          title={'How were the amenities?'}
-          error={errors.rating2?.message as string}
-          updateRating={handleRating2Change}
-          reset={{ getRating: starRating, setRating: setStarRating }}
-        />
-
-        <TextBox
-          placeholder={'Did any amenities stand out to you?'}
-          error={errors.rating2Textbox?.message as string}
-          register={{ ...register('rating2Textbox') }}
-        />
-
-        <Stars
-          title={'How do our prices compare?'}
-          error={errors.rating3?.message as string}
-          updateRating={handleRating3Change}
-          reset={{ getRating: starRating, setRating: setStarRating }}
-        />
-        <TextBox
-          placeholder={'How do we compare?'}
-          error={errors.rating3Textbox?.message as string}
-          register={{ ...register('rating3Textbox') }}
-        />
+          return null;
+        })}
       </div>
       <button type='submit' className='submitButton'>
         Submit

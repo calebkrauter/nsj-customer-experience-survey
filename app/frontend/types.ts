@@ -1,15 +1,12 @@
-
-
-
-
-
+export type FieldType = 'text_input' | 'text_box' | 'stars' | 'dropdown_select_one';
 
 interface QuestionBase {
   helpText: string,
   id: string,
   label: string,
+  showLabel: boolean,
   required: boolean,
-  type: string,
+  type: FieldType,
 }
 
 interface TextQuestion extends QuestionBase {
@@ -37,3 +34,23 @@ export interface SurveyDefinition {
   version: number,
   questions: SurveyQuestion[],
 }
+
+const enum Keys {
+  PLACEHOLDER = 'placeholder',
+  OPTIONS ='options',
+}
+
+export const enum FieldTypes {
+  TEXT_INPUT = 'text_input',
+  TEXT_BOX = 'text_box',
+  STARS = 'stars',
+  DROPDOWN_SELECT_ONE = 'dropdown_select_one',
+
+}
+  export function hasPlaceholder(question: SurveyQuestion): question is TextQuestion | DropdownSelect {
+    return 'placeholder' in question;
+  }
+
+  export function hasOptions(question: SurveyQuestion): question is DropdownSelect {
+    return 'options' in question;
+  }
