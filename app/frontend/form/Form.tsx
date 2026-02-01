@@ -11,40 +11,44 @@ import { TextBox } from '../components/TextBox';
 import z, { ZodNumber, ZodString } from 'zod';
 // import { schema } from '../validation/schema';
 import { postSubmission } from '../requests/postSubmission';
-import { surveys } from '../form-templates/registry';
+
 import { v4 as uuidv4 } from 'uuid';
 
 import {
   FieldTypes,
   hasOptions,
   hasPlaceholder,
+  SurveyDefinition,
   SurveyQuestion,
 } from '../types';
 import { Hero } from '../components/Hero';
-
-const questions: SurveyQuestion[] = surveys.customer_experience.questions;
+import { surveys } from '../form-templates/registry';
 
 // Create a dynamic Zod schema
-const schema = z.object(
-  questions.reduce(
-    (result, field) => {
-      if (field.type === FieldTypes.TEXT_INPUT) {
-        result[field.id] = z.string().min(1);
-      } else if (field.type === FieldTypes.TEXT_BOX) {
-        result[field.id] = z.string().min(1);
-      } else if (field.type === FieldTypes.STARS) {
-        result[field.id] = z.coerce.number().min(1, 'Select rating');
-      } else if (field.type === FieldTypes.DROPDOWN_SELECT_ONE) {
-        result[field.id] = z.string().refine((val) => val !== '');
-      }
 
-      return result;
-    },
-    {} as Record<string, z.ZodTypeAny>,
-  ),
-);
+interface Props {
+  surveyKey: string;
+}
+export function Form({ surveyKey }: Props) {
+  const questions: SurveyQuestion[] = surveys[surveyKey].questions;
+  const schema = z.object(
+    questions.reduce(
+      (result, field) => {
+        if (field.type === FieldTypes.TEXT_INPUT) {
+          result[field.id] = z.string().min(1);
+        } else if (field.type === FieldTypes.TEXT_BOX) {
+          result[field.id] = z.string().min(1);
+        } else if (field.type === FieldTypes.STARS) {
+          result[field.id] = z.coerce.number().min(1, 'Select rating');
+        } else if (field.type === FieldTypes.DROPDOWN_SELECT_ONE) {
+          result[field.id] = z.string().refine((val) => val !== '');
+        }
 
-export function Form() {
+        return result;
+      },
+      {} as Record<string, z.ZodTypeAny>,
+    ),
+  );
   type FormValues = z.infer<typeof schema>;
   const [starRating, setStarRating] = useState(0);
   const SUBMITTER_KEY = 'submitterId';
@@ -74,7 +78,7 @@ export function Form() {
     postSubmission({
       responseId: uuidv4(),
       rowVersion: 0,
-      surveyKey: surveys.customer_experience.surveyKey,
+      surveyKey: surveys[surveyKey].surveyKey,
       submitterId: getSubmitterId(),
 
       submittedAt: new Date(),

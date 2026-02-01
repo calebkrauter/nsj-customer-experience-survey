@@ -1,6 +1,6 @@
 export async function postSubmission(submission: unknown) {
   try {
-      const response = await fetch('api/post', {
+      const response = await fetch('/api/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

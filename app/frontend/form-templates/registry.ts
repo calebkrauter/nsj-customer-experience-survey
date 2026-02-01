@@ -113,4 +113,23 @@ export const surveys: Record<string, SurveyDefinition> = {
 			},
 		],
 	},
+		fbo_workshop_survey: {
+		surveyKey: 'fbo_workshop_survey',
+		surveyName: 'FBO Workshop Survey',
+		surveyPath: '/surveys/fbo-workshop-survey',
+		version: 1,
+		questions: [
+			{
+				helpText: 'Example: N123AB',
+				id: 'tail_number',
+				label: 'Tail Number',
+				maxLength: 10,
+				minLength: 3,
+				placeholder: 'N123AB',
+				required: true,
+				showLabel: true,
+				type: 'text_input',
+			},
+		]
+	}
 }
