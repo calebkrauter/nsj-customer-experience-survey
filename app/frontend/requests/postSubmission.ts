@@ -9,7 +9,9 @@ export async function postSubmission(submission: unknown) {
       });
       if (!response.ok) throw new Error("Data didn't fetch");
       console.log(response.json());
+      return response.ok;
     } catch (error) {
       console.log(error);
+      return error;
     }
-}
+  }

@@ -14,6 +14,6 @@ export async function authenticateUser(auth: unknown) {
       const data = await response.json();
       return data.authenticated;
     } catch (error) {
-      return {authenticated: false}
+      return false
     }
 }

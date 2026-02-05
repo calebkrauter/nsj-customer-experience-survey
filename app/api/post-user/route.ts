@@ -7,17 +7,17 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   const data = await request.json();
-    const expiration = new Date().setDate(new Date().getDate() + 30)
       const result = await db.query(
         `SELECT password_hash FROM users`
       );
+      const cookieStore = await cookies();
       for (const row of result.rows) {
         const authenticated = await bcrypt.compare(data.password, row.password_hash)
         console.log('password attempt: [', data.password, '], password stored: [', row.password_hash, '], authenticated: [', authenticated, ']')
-        const cookieStore = await cookies();
-        if (authenticated)
+        if (authenticated) {
           cookieStore.set('logged_in', 'true', {maxAge: 30 * 24 * 60 * 60})
           return Response.json({authenticated: authenticated});
+        }
       }
   
   return NextResponse.json({authenticated: false})
