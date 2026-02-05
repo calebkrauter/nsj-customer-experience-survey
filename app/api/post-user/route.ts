@@ -16,7 +16,7 @@ export async function POST(request: Request) {
         console.log('password attempt: [', data.password, '], password stored: [', row.password_hash, '], authenticated: [', authenticated, ']')
         const cookieStore = await cookies();
         if (authenticated)
-          cookieStore.set('logged_in', 'true', {maxAge: 30})
+          cookieStore.set('logged_in', 'true', {maxAge: 30 * 24 * 60 * 60})
           return Response.json({authenticated: authenticated});
       }
   

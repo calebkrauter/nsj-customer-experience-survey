@@ -261,6 +261,22 @@ button {
   justify-content: center;
 }
 
+.formButton {
+  width: 15em;
+  height: 5em;
+  padding: 30px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: large;
+  margin: 30px;
+  background-color:#0271e3;
+  color: rgb(255, 255, 255);
+  text-justify: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .row {
   display: flex;
   flex-direction: row;
