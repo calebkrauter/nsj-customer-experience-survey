@@ -141,7 +141,7 @@ export const surveys: Record<string, SurveyDefinition> = {
       {
         id: 'objective',
         label:
-          'Objective: The goal of the FBO survey is to evaluate the effectiveness of the leadership team by gathering employee feedback on communication, decisionmaking, vision, teamwork, operational changes and support. The survey aims to identify leadership strengths, uncover areas for improvement, and assess alignment with company values and culture. Insights gained will help guide organizational development, enhance transparency, strengthen employee engagement, and ensure leaders are equipped to drive mission success.',
+          '**Objective:** The goal of the FBO survey is to evaluate the effectiveness of the leadership team by gathering employee feedback on communication, decisionmaking, vision, teamwork, operational changes and support. The survey aims to identify leadership strengths, uncover areas for improvement, and assess alignment with company values and culture. Insights gained will help guide organizational development, enhance transparency, strengthen employee engagement, and ensure leaders are equipped to drive mission success.',
         showLabel: true,
         required: true,
         type: 'question_base',
@@ -150,7 +150,7 @@ export const surveys: Record<string, SurveyDefinition> = {
       {
         id: 'instructions',
         label:
-          'Instructions: Thank you for taking the time to provide feedback. Your input is essential in helping us strengthen our leadership practices and create a better workplace environment for the entire team. The survey is 100% anonymous. Please answer honestly, your candid feedback helps us improve and perform to the highest standards. For each question: Select the response that best represents your experience or opinion. Although not required, but highly encouraged, extra space has been provided to express any desired comment to each selected question.',
+          '**Instructions:** Thank you for taking the time to provide feedback. Your input is essential in helping us strengthen our leadership practices and create a better workplace environment for the entire team. The survey is 100% anonymous. Please answer honestly, your candid feedback helps us improve and perform to the highest standards. For each question: Select the response that best represents your experience or opinion. Although not required, but highly encouraged, extra space has been provided to express any desired comment to each selected question.',
         showLabel: true,
         required: true,
         type: 'question_base',
@@ -189,7 +189,7 @@ export const surveys: Record<string, SurveyDefinition> = {
       {
         helpText: '',
         id: 'question_2',
-        label: 'How effectively does your direct leadership support you in your role?',
+        label: '2. How effectively does your direct leadership support you in your role?',
         required: true,
         showLabel: true,
         options: [
@@ -347,20 +347,44 @@ export const surveys: Record<string, SurveyDefinition> = {
 
       // Scoreboard intro (non-interactive)
       {
-        id: 'scoreboard_intro',
+        id: 'scoreboard_intro_header',
         label:
-          'FBO Scoreboard Ideas\nThe FBO Leadership Team is seeking creative ideas to showcase the hard work and accomplishments of the entire FBO staff. The goal is to highlight the value and dedication demonstrated by the team across all areas of operation.\nPlease review the scoreboard ideas listed below and select as many as you’d like—there is no limit to the number of choices you can make. If you have additional suggestions that are not listed, feel free to add your own ideas.',
+          '**FBO Scoreboard Ideas**',
+        showLabel: true,
+        required: false,
+        type: 'question_base',
+      },
+			{
+        id: 'scoreboard_intro1',
+        label:
+          'The FBO Leadership Team is seeking creative ideas to showcase the hard work and accomplishments of the entire FBO staff.',
+        showLabel: true,
+        required: false,
+        type: 'question_base',
+      },
+			{
+        id: 'scoreboard_intro2',
+        label:
+          'The goal is to highlight the value and dedication demonstrated by the team across all areas of operation.\nPlease review the scoreboard ideas listed below and select as many as you’d like—there is no limit to the number of choices you can make. If you have additional suggestions that are not listed, feel free to add your own ideas.',
         showLabel: true,
         required: false,
         type: 'question_base',
       },
 
+						{
+        id: 'scoreboard_intro_instructions',
+        label:
+          '**Instructions:** Please review the scoreboard ideas listed below and select as many as you’d like—there is no limit to the number of choices you can make. If you have additional suggestions that are not listed, feel free to add your own ideas.',
+        showLabel: true,
+        required: false,
+        type: 'question_base',
+      },
       // Q8 – Ground Services Performed
       {
         helpText:
           'Select as many ideas as you’d like—the goal is to showcase the team’s hard work and accomplishments.',
         id: 'question_8',
-        label: 'Ground Services Performed (select all that apply)',
+        label: '**Ground Services Performed** (select all that apply)',
         placeholder: 'Select one or more',
         required: false,
         showLabel: true,
@@ -380,7 +404,7 @@ export const surveys: Record<string, SurveyDefinition> = {
         helpText:
           'Select as many ideas as you’d like—the goal is to showcase the team’s hard work and accomplishments.',
         id: 'question_9',
-        label: 'Ramp Fueling Operations (select all that apply)',
+        label: '**Ramp Fueling Operations** (select all that apply)',
         placeholder: 'Select one or more',
         required: false,
         showLabel: true,
@@ -403,7 +427,7 @@ export const surveys: Record<string, SurveyDefinition> = {
         helpText:
           'Select as many ideas as you’d like—the goal is to showcase the team’s hard work and accomplishments.',
         id: 'question_10',
-        label: 'Seasonal / De-Ice Operations (select all that apply)',
+        label: '**Seasonal / De-Ice Operations** (select all that apply)',
         placeholder: 'Select one or more',
         required: false,
         showLabel: true,
@@ -419,7 +443,7 @@ export const surveys: Record<string, SurveyDefinition> = {
         helpText:
           'Select as many ideas as you’d like—the goal is to showcase the team’s hard work and accomplishments.',
         id: 'question_11',
-        label: 'Programs, Training & Admin (select all that apply)',
+        label: '**Programs, Training & Admin** (select all that apply)',
         placeholder: 'Select one or more',
         required: false,
         showLabel: true,
@@ -442,13 +466,65 @@ export const surveys: Record<string, SurveyDefinition> = {
 
       // Closing note (non-interactive)
       {
-        id: 'closing_note',
+        id: 'closing_note1',
         label:
-          'From the FBO Leadership, Thank you for input. This information will be reviewed together as a team, with the goal of identifying shared opportunities to deliver the highest level of customer service as the most unified, highly qualified FBO in the Northwest. The results of this survey will be shared and discussed during the upcoming annual FBO leadership development workshop. Thank You',
+          '**From the FBO Leadership**, Thank you for input. This information will be reviewed together as a team, with the goal of identifying shared opportunities to deliver the highest level of customer service as the most unified, highly qualified FBO in the Northwest.',
+        showLabel: true,
+        required: false,
+        type: 'question_base',
+      },
+			{
+        id: 'closing_note2',
+        label:
+          'The results of this survey will be shared and discussed during the upcoming annual FBO leadership development workshop. Thank You',
         showLabel: true,
         required: false,
         type: 'question_base',
       },
     ],
   },
+	feedback:{
+		surveyKey: 'feedback',
+    surveyName: 'App Feedback',
+    surveyPath: '/surveys/feedback',
+    version: 1,
+    questions: [
+      {
+        helpText: '',
+        id: 'bugs',
+        label: 'Did you encounter any bugs?',
+        maxLength: 10,
+        minLength: 3,
+        placeholder: 'Bugs... 𖢥',
+        required: true,
+        showLabel: true,
+        type: 'text_box',
+      },
+      {
+        helpText: '',
+        id: 'improvements',
+        label: 'What would you suggest to improve the app or experience?',
+				maxLength: 10,
+        minLength: 3,
+				placeholder: 'Pizza...',
+        required: true,
+        showLabel: true,
+        type: 'text_box',
+      },
+			{
+        helpText: '',
+        id: 'general_feedback',
+        label: 'General Feedback',
+				maxLength: 10,
+        minLength: 3,
+				placeholder: 'Tell us...',
+        required: true,
+        showLabel: true,
+        type: 'text_box',
+      },
+      
+    ],
+  },
+
+	
 };

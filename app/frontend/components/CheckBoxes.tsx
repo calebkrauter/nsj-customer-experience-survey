@@ -9,6 +9,7 @@ import {
 import { KeyValue, SurveyQuestion } from '../types';
 import { CheckBox } from './CheckBox';
 import { Dispatch, SetStateAction } from 'react';
+import Markdown from 'react-markdown';
 
 interface Props {
   question: SurveyQuestion;
@@ -32,7 +33,15 @@ export function CheckBoxes({
       className={`col ratingGroup radioGroup ${error ? 'error errorBorder' : ''}`}
       key={question.id}
     >
-      <label className='subject'>{question.label}</label>
+      <div className='subject'>
+        <Markdown
+          components={{
+            p: ({ children }) => <label>{children}</label>,
+          }}
+        >
+          {question.label}
+        </Markdown>
+      </div>{' '}
       {options.map((option, i) => {
         return (
           <div key={i}>

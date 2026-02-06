@@ -1,6 +1,7 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 import { KeyValue, SurveyQuestion } from '../types';
 import { RadioCircle } from './RadioCircle';
+import Markdown from 'react-markdown';
 
 interface Props {
   question: SurveyQuestion;
@@ -15,7 +16,15 @@ export function RadioGroup({ question, id, options, error, register }: Props) {
       className={`col ratingGroup radioGroup ${error ? 'error errorBorder' : ''}`}
       key={question.id}
     >
-      <label className='subject multiSelectText'>{question.label}</label>
+      <div className='subject multiSelectText'>
+        <Markdown
+          components={{
+            p: ({ children }) => <label>{children}</label>,
+          }}
+        >
+          {question.label}
+        </Markdown>
+      </div>
       {options.map((option, i) => {
         return (
           <div key={i}>

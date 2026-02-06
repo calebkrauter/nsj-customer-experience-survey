@@ -5,11 +5,13 @@ export function LinkToForms() {
     <div className='row'>
       {Object.keys(surveys).map((surveyKey, i) => {
         return (
-          <a key={i} href={`/surveys/${surveyKey}`}>
-            <button className='formButton'>
-              {surveys[surveyKey].surveyName}
-            </button>
-          </a>
+          surveyKey !== 'feedback' && (
+            <a key={i} href={`/surveys/${surveyKey}`}>
+              <button className='formButton'>
+                {surveys[surveyKey].surveyName}
+              </button>
+            </a>
+          )
         );
       })}
     </div>

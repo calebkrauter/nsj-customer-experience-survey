@@ -4,7 +4,7 @@ export function Footer() {
       <a href={'/'} className='link'>
         Other Surveys
       </a>
-      <a href={'/feedback'} className='link'>
+      <a href={'/surveys/feedback'} className='link'>
         Submit Feedback
       </a>
       <a href={'/'} className='link'>
