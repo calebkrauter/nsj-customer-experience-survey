@@ -1,28 +1,38 @@
 'use client';
+import { InputHTMLAttributes, HTMLInputTypeAttribute } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 interface Props {
+  id: string;
   title?: string;
   placeholder: string;
   error: string;
   register: UseFormRegisterReturn;
+  type: HTMLInputTypeAttribute;
+  showLabel?: boolean;
 }
 
-export function InputField({ title, placeholder, error, register }: Props) {
+export function InputField({
+  id,
+  title,
+  placeholder,
+  error,
+  register,
+  type,
+  showLabel,
+}: Props) {
   return (
     <div className='tailInputContainer col input2'>
-      {title && (
-        <label
-          className={`subject ${error ? 'error' : ''}`}
-          htmlFor='tail_number'
-        >
+      {title && showLabel && (
+        <label className={`subject ${error ? 'error' : ''}`} htmlFor={id}>
           {title}
         </label>
       )}
       <input
-        placeholder='N1234'
-        className={`fields ${error ? 'errorOutline' : ' outline'}`}
-        id='tail_number'
+        placeholder={placeholder}
+        className={`fields inputText ${error ? 'errorOutline' : ' outline'}`}
+        id={id}
         {...register}
+        type={type}
       ></input>
     </div>
   );

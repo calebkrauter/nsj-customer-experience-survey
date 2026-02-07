@@ -4,19 +4,26 @@ import { FieldError } from 'react-hook-form';
 
 interface Props {
   title?: string;
-  updateRating: (value: number) => void;
+  itr: number;
+  updateRating: (value: number, itr: number) => void;
   error: string;
   reset: { getRating: number; setRating: Dispatch<SetStateAction<number>> };
+  showLabel?: boolean;
 }
-export function Stars({ title, updateRating, error, reset }: Props) {
+export function Stars({
+  title,
+  itr,
+  updateRating,
+  error,
+  reset,
+  showLabel,
+}: Props) {
   const [getRating, setRating] = useState(0);
-  const [getSubjectRating, setSubjectRating] = useState(0);
 
   function handleRating(rating: number) {
     const curRating = getRating === rating ? 0 : rating;
     setRating(curRating);
-    updateRating(curRating);
-    setSubjectRating(curRating);
+    updateRating(curRating, itr);
   }
 
   useEffect(() => {
@@ -29,8 +36,10 @@ export function Stars({ title, updateRating, error, reset }: Props) {
     resetRating();
   }, [reset]);
   return (
-    <div className={`subject ratingHeader ${error ? 'error' : ''}`}>
-      <div>{title}</div>
+    <div
+      className={`subject ${showLabel ? 'ratingHeader' : ''} ${error ? 'error' : ''}`}
+    >
+      {title && showLabel && <div className='ratingGroup'>{title}</div>}
       <div id='ratingGroup' className='ratingGroup'>
         <div className={`stars`}>
           <div

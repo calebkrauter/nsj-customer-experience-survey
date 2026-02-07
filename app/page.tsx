@@ -1,10 +1,15 @@
-'use client';
-import { Form } from './frontend/form/Form';
+import { Footer } from './frontend/components/Footer';
+import { Hero } from './frontend/components/Hero';
+import { LinkToForms } from './frontend/LinkToForms';
 
 export default function Home() {
   return (
-    <main className='main'>
-      <Form />
+    <main className='main col'>
+      <div className='centerX col'>
+        <Hero />
+        <LinkToForms></LinkToForms>
+      </div>
+      <Footer />
     </main>
   );
 }

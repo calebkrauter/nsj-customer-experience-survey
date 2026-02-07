@@ -1,16 +1,15 @@
-export async function postSubmission(submissionData: unknown) {
+export async function postSubmission(submission: unknown) {
   try {
-      const response = await fetch('api/post', {
+      const response = await fetch('/api/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'API-Key': 'mock-API-Key',
         },
-        body: JSON.stringify(submissionData),
+        body: JSON.stringify(submission),
       });
       if (!response.ok) throw new Error("Data didn't fetch");
-      console.log(response.json());
+      return response.json();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
-}
+  }
